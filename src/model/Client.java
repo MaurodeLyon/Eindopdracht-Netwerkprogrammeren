@@ -1,22 +1,21 @@
 package model;
 
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.Socket;
 
-import view.ClientPanel;
+import view.GamePanel;
 import view.Frame;
 import view.Menu;
 import controller.Controller;
 
 public class Client {
 
-	private ClientPanel clientPanel;
+	private GamePanel clientPanel;
 	private Socket socket;
 	private NetworkDataManager dataManager;
 
 	public Client(Frame frame, Menu menu) {
-		clientPanel = new ClientPanel();
+		clientPanel = new GamePanel();
 		frame.remove(menu);
 		frame.setContentPane(clientPanel);
 		frame.addKeyListener(new Controller().getKeyboard());

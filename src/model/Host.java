@@ -5,22 +5,22 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import view.Frame;
-import view.HostPanel;
+import view.GamePanel;
 import view.Menu;
 import controller.Controller;
 
 public class Host {
 
-	private HostPanel hostPanel;
+	private GamePanel gamePanel;
 	private ServerSocket server;
 	private Socket socket;
 	private NetworkDataManager dataManager;
 	
 
 	public Host(Frame frame, Menu menu) {
-		hostPanel = new HostPanel();
+		gamePanel = new GamePanel();
 		frame.remove(menu);
-		frame.setContentPane(hostPanel);
+		frame.setContentPane(gamePanel);
 		frame.addKeyListener(new Controller().getKeyboard());
 		frame.revalidate();
 		Init();
