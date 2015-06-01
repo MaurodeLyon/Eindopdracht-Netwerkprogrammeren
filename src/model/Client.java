@@ -7,6 +7,7 @@ import java.net.Socket;
 import view.ClientPanel;
 import view.Frame;
 import view.Menu;
+import controller.Controller;
 
 public class Client {
 
@@ -18,6 +19,7 @@ public class Client {
 		clientPanel = new ClientPanel();
 		frame.remove(menu);
 		frame.setContentPane(clientPanel);
+		frame.addKeyListener(new Controller().getKeyboard());
 		frame.revalidate();
 		Init();
 	}
