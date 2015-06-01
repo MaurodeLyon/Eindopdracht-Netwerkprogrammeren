@@ -32,10 +32,14 @@ public class Menu extends JPanel {
 		JButton host = new JButton("Host");
 		host.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Host(frame);
+				setHost();
 			}
 		});
 		add(host);
+	}
+
+	protected void setHost() {
+		new Host(frame, this);
 	}
 
 	protected void setClient() {
