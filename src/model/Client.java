@@ -22,19 +22,14 @@ public class Client {
 		frame.revalidate();
 		Init();
 	}
-	
-	public void Init()
-	{
-		
+
+	public void Init() {
 		try {
-			socket = new Socket("localhost",8888);
+			socket = new Socket("localhost", 8888);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		dataManager = new NetworkDataManager(socket);
 		dataManager.start();
-		
 	}
 }

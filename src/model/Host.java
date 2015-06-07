@@ -33,13 +33,11 @@ public class Host {
 		try {
 			server= new ServerSocket(8888);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			socket = server.accept();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
