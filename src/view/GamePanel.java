@@ -19,12 +19,11 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	private Rectangle2D Player1;
 	private Rectangle2D Player2;
-	private Rectangle2D Ball;
-	private Rectangle2D map;
-	
-	private boolean isHeadingR=true;
-	private boolean isHeadingU=true;
-	private int angle=0;
+	private Ellipse2D.Double ball;
+	private Rectangle2D.Double map;
+
+	private int speedX = 2;
+	private int speedY = 2;
 
 	public GamePanel() {
 		new Timer(1000 / 60, this).start();
@@ -32,9 +31,10 @@ public class GamePanel extends JPanel implements ActionListener {
 		setPreferredSize(new Dimension(1080, 720));
 		setBackground(Color.BLACK);
 		Player1 = new Rectangle2D.Double(30, getHeight() / 2, 10, 50);
-		Player2 = new Rectangle2D.Double(getWidth() - 40, getHeight() / 2, 10,50);
-		Ball = new Rectangle2D.Double(getWidth() / 2, getHeight() / 2, 20, 20);
-		map = new Rectangle2D.Float(20f, 20f, 1040f, 680f);
+		Player2 = new Rectangle2D.Double(getWidth() - 40, getHeight() / 2, 10,
+				50);
+		ball = new Ellipse2D.Double(getWidth() / 2, getHeight() / 2, 20, 20);
+		map = new Rectangle2D.Double(20f, 20f, 1040f, 680f);
 	}
 
 	public void paintComponent(Graphics g) {
@@ -49,18 +49,18 @@ public class GamePanel extends JPanel implements ActionListener {
 		g2.fill(Player1);
 		g2.setColor(Color.BLUE);
 		g2.fill(Player2);
-		g2.setColor(Color.WHITE);
-		
-		g2.fill(Ball);
-		
+		g2.setColor(Color.ORANGE);
+		g2.fill(ball);
+
 	}
 
 	private void drawMap(Graphics2D g2) {
-		
 		g2.setColor(Color.WHITE);
-		g2.setStroke(new BasicStroke(9, BasicStroke.CAP_BUTT,BasicStroke.JOIN_BEVEL, 0));
+		g2.setStroke(new BasicStroke(9, BasicStroke.CAP_BUTT,
+				BasicStroke.JOIN_BEVEL, 0));
 		g2.draw((Shape) map);
-		g2.setStroke(new BasicStroke(9, BasicStroke.CAP_BUTT,BasicStroke.JOIN_BEVEL, 0, new float[] { 9 }, 0));
+		g2.setStroke(new BasicStroke(9, BasicStroke.CAP_BUTT,
+				BasicStroke.JOIN_BEVEL, 0, new float[] { 9 }, 0));
 		g2.drawLine(1080 / 2, 20, 1080 / 2, 700);
 	}
 
@@ -72,12 +72,12 @@ public class GamePanel extends JPanel implements ActionListener {
 		Player2 = player2;
 	}
 
-	public void setBall(Rectangle2D ball) {
-		Ball = ball;
+	public void setBall(Ellipse2D.Double ball) {
+		this.ball = ball;
 	}
 
-	public Rectangle2D getBall() {
-		return Ball;
+	public Ellipse2D.Double getBall() {
+		return ball;
 	}
 
 	public Rectangle2D getPlayer1() {
@@ -90,42 +90,46 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		ball.x += speedX;
+		ball.y += speedY;
+
+		// checks if ball touches left border
+		/*
+		 * if (ball.x < map.x) { speedX = -speedX; speedY = -5 + (int)
+		 * (Math.random() * 10); }
+		 * 
+		 * // checks if ball touches right border if (ball.x + ball.width >
+		 * map.x + map.width) { speedX = -speedX; speedY = -5 + (int)
+		 * (Math.random() * 10); }
+		 */
+
+		// check if ball touches top border
+		if (ball.y < map.y) {
+			speedY = -speedY;
+			speedX = -5 + (int) (Math.random() * 10);
+		}
+
+		// checks if ball touches bottem border
+		if (ball.y + ball.width > map.y + map.height) {
+			speedY = -speedY;
+			speedX = -5 + (int) (Math.random() * 10);
+		}
+
+		// checks if ball touches left player
+		if (Player1.getY() < ball.y
+				&& Player1.getY() + Player1.getHeight() > ball.y
+				&& Player1.getX() > ball.x) {
+			speedX = -speedX;
+			speedY = -5 + (int) (Math.random() * 10);
+		}
+		if (Player2.getY() < ball.y
+				&& Player2.getY() + Player1.getHeight() > ball.y
+				&& Player2.getX() < ball.x) {
+			speedX = -speedX;
+			speedY = -5 + (int) (Math.random() * 10);
+		}
+
 		repaint();
-		if(isHeadingR)
-		{
-			if(Player2.intersects(Ball) ||!map.contains(Ball))
-			{
-				isHeadingR=false;
-				isHeadingU=!isHeadingU;
-			}
-			if(isHeadingU)
-			{
-				Ball.setRect(Ball.getX()+1, Ball.getY()+1,Ball.getWidth(), Ball.getHeight());
-			}
-			else
-			{
-				Ball.setRect(Ball.getX()+1, Ball.getY()-1,Ball.getWidth(), Ball.getHeight());
-			}
-			
-		}
-		else
-		{
-			if(Player1.intersects(Ball) || !map.contains(Ball))
-			{
-				isHeadingR=true;
-				isHeadingU=!isHeadingU;
-			}
-			
-			if(isHeadingU)
-			{
-				Ball.setRect(Ball.getX()-1, Ball.getY()+1,Ball.getWidth(), Ball.getHeight());
-			}
-			else
-			{
-				Ball.setRect(Ball.getX()-1, Ball.getY()-1,Ball.getWidth(), Ball.getHeight());
-			}
-		}
-		
 	}
 
 }

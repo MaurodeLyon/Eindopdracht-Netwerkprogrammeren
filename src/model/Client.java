@@ -25,11 +25,13 @@ public class Client {
 		controller =new Controller(clientPanel,false); 
 		this.frame.remove(menu);
 		this.frame.setContentPane(clientPanel);
+		
 		connectWiimote();
-		wiimote.addWiiMoteEventListeners(controller.getWiimote());
+		//wiimote.addWiiMoteEventListeners(controller.getWiimote());
 		this.frame.addKeyListener(controller.getKeyboard());
-		this.frame.revalidate();
+
 		Init();
+		this.frame.revalidate();
 		this.frame.requestFocus();
 	}
 	
