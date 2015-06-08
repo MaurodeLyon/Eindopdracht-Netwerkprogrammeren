@@ -16,17 +16,20 @@ public class Host {
 	private Socket socket;
 	private NetworkDataManager dataManager;
 	private Controller controller;
+	private Frame frame;
 	
 	
 
 	public Host(Frame frame, Menu menu) {
+		this.frame = frame;
 		gamePanel = new GamePanel();
 		controller= new Controller(gamePanel,true);
-		frame.remove(menu);
-		frame.setContentPane(gamePanel);
-		frame.addKeyListener(controller.getKeyboard());
-		frame.revalidate();
+		this.frame.remove(menu);
+		this.frame.setContentPane(gamePanel);
+		this.frame.addKeyListener(controller.getKeyboard());
+		this.frame.revalidate();
 		Init();
+		this.frame.requestFocus();
 	}
 	
 	public void Init()

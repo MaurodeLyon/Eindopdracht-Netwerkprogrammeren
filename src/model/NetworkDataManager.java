@@ -102,7 +102,6 @@ public class NetworkDataManager implements Runnable {
 		// send own position
 		out.writeDouble(panel.getPlayer1().getY());
 		// receive position player2
-		System.out.println(in.readDouble());
 		if (in.available() > 0) {
 			double player2y = in.readDouble();
 			panel.getPlayer2().setRect(1080 - 40, player2y, 10, 50);

@@ -14,24 +14,28 @@ public class Client {
 	private Socket socket;
 	private NetworkDataManager dataManager;
 	private Controller controller;
+	private Frame frame;
 
 	public Client(Frame frame, Menu menu) {
+		this.frame = frame;
 		clientPanel = new GamePanel();
 		controller =new Controller(clientPanel,false); 
-		frame.remove(menu);
-		frame.setContentPane(clientPanel);
-		frame.addKeyListener(controller.getKeyboard());
-		frame.revalidate();
+		this.frame.remove(menu);
+		this.frame.setContentPane(clientPanel);
+		this.frame.addKeyListener(controller.getKeyboard());
+		this.frame.revalidate();
 		Init();
+		this.frame.requestFocus();
 	}
 
 	public void Init() {
 		try {
-			socket = new Socket("145.102.72.143", 8888);
+			socket = new Socket("localhost", 8888);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		dataManager = new NetworkDataManager(socket,false,clientPanel);
 		dataManager.start();
+		
 	}
 }
