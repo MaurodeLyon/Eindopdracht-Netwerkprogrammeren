@@ -15,13 +15,16 @@ public class Host {
 	private ServerSocket server;
 	private Socket socket;
 	private NetworkDataManager dataManager;
+	private Controller controller;
+	
 	
 
 	public Host(Frame frame, Menu menu) {
 		gamePanel = new GamePanel();
+		controller= new Controller(gamePanel,true);
 		frame.remove(menu);
 		frame.setContentPane(gamePanel);
-		frame.addKeyListener(new Controller().getKeyboard());
+		frame.addKeyListener(controller.getKeyboard());
 		frame.revalidate();
 		
 		Init();

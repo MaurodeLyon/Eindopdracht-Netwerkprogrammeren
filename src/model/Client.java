@@ -13,12 +13,14 @@ public class Client {
 	private GamePanel clientPanel;
 	private Socket socket;
 	private NetworkDataManager dataManager;
+	private Controller controller;
 
 	public Client(Frame frame, Menu menu) {
 		clientPanel = new GamePanel();
+		controller =new Controller(clientPanel,false); 
 		frame.remove(menu);
 		frame.setContentPane(clientPanel);
-		frame.addKeyListener(new Controller().getKeyboard());
+		frame.addKeyListener(controller.getKeyboard());
 		frame.revalidate();
 		Init();
 	}

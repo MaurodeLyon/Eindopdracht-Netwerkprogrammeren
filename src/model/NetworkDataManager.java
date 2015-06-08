@@ -67,7 +67,7 @@ public class NetworkDataManager implements Runnable {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					panel.setPlayer1(new Rectangle2D.Double(30, panel.getPlayer1().getY()+1, 10, 50));
+					//panel.setPlayer1(new Rectangle2D.Double(30, panel.getPlayer1().getY()+1, 10, 50));
 				}
 				else
 				{
@@ -124,7 +124,7 @@ public class NetworkDataManager implements Runnable {
 		{
 			double player2y=in.readDouble();
 		
-			panel.setPlayer2(new Rectangle2D.Double(540 - 40,player2y, 10,50));
+			panel.setPlayer2(new Rectangle2D.Double(1080 - 40,player2y, 10,50));
 		}
 		out.writeDouble(panel.getBall().getX());
 		out.writeDouble(panel.getBall().getY());
