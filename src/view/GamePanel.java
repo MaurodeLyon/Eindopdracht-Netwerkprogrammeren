@@ -94,39 +94,42 @@ public class GamePanel extends JPanel implements ActionListener {
 		ball.y += speedY;
 
 		// checks if ball touches left border
-		/*
-		 * if (ball.x < map.x) { speedX = -speedX; speedY = -5 + (int)
-		 * (Math.random() * 10); }
-		 * 
-		 * // checks if ball touches right border if (ball.x + ball.width >
-		 * map.x + map.width) { speedX = -speedX; speedY = -5 + (int)
-		 * (Math.random() * 10); }
-		 */
+		if (ball.x < map.x) {
+			ball = new Ellipse2D.Double(getWidth() / 2, getHeight() / 2, 20, 20);
+			//point for player 2
+		}
+
+		// checks if ball touches right border
+		if (ball.x + ball.width > map.x + map.width) {
+			ball = new Ellipse2D.Double(getWidth() / 2, getHeight() / 2, 20, 20);
+			//point for player 1
+		}
 
 		// check if ball touches top border
 		if (ball.y < map.y) {
 			speedY = -speedY;
-			speedX = -5 + (int) (Math.random() * 10);
+			//speedX = -5 + (int) (Math.random() * 10);
 		}
 
 		// checks if ball touches bottem border
 		if (ball.y + ball.width > map.y + map.height) {
 			speedY = -speedY;
-			speedX = -5 + (int) (Math.random() * 10);
+			//speedX = -5 + (int) (Math.random() * 10);
 		}
 
 		// checks if ball touches left player
 		if (Player1.getY() < ball.y
-				&& Player1.getY() + Player1.getHeight() > ball.y
-				&& Player1.getX() > ball.x) {
+		 && Player1.getY() + Player1.getHeight() > ball.y
+		 && Player1.getX() + Player1.getWidth() > ball.x) {
 			speedX = -speedX;
-			speedY = -5 + (int) (Math.random() * 10);
+			//speedY = -5 + (int) (Math.random() * 10);
 		}
+		
 		if (Player2.getY() < ball.y
-				&& Player2.getY() + Player1.getHeight() > ball.y
-				&& Player2.getX() < ball.x) {
+		 && Player2.getY() + Player1.getHeight() > ball.y
+		 && Player2.getX() < ball.x + ball.width) {
 			speedX = -speedX;
-			speedY = -5 + (int) (Math.random() * 10);
+			//speedY = -5 + (int) (Math.random() * 10);
 		}
 
 		repaint();

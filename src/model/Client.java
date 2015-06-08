@@ -27,7 +27,7 @@ public class Client {
 		this.frame.setContentPane(clientPanel);
 		
 		connectWiimote();
-		//wiimote.addWiiMoteEventListeners(controller.getWiimote());
+		wiimote.addWiiMoteEventListeners(controller.getWiimote());
 		this.frame.addKeyListener(controller.getKeyboard());
 
 		Init();
