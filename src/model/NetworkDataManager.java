@@ -87,7 +87,7 @@ public class NetworkDataManager implements Runnable {
 			double ballX = in.readDouble();
 			double ballY = in.readDouble();
 
-			panel.setBall(new Ellipse2D.Double(ballX, ballY, 20, 20));
+			panel.setBall(new Rectangle2D.Double(ballX, ballY, 20, 20));
 
 			double player1y = in.readDouble();
 			panel.setPlayer1(new Rectangle2D.Double(30, player1y, 10, 50));

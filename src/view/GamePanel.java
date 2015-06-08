@@ -19,7 +19,12 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	private Rectangle2D Player1;
 	private Rectangle2D Player2;
-	private Ellipse2D Ball;
+	private Rectangle2D Ball;
+	private Rectangle2D map;
+	
+	private boolean isHeadingR=true;
+	private boolean isHeadingU=true;
+	private int angle=0;
 
 	public GamePanel() {
 		new Timer(1000 / 60, this).start();
@@ -28,7 +33,8 @@ public class GamePanel extends JPanel implements ActionListener {
 		setBackground(Color.BLACK);
 		Player1 = new Rectangle2D.Double(30, getHeight() / 2, 10, 50);
 		Player2 = new Rectangle2D.Double(getWidth() - 40, getHeight() / 2, 10,50);
-		Ball = new Ellipse2D.Double(getWidth() / 2, getHeight() / 2, 20, 20);
+		Ball = new Rectangle2D.Double(getWidth() / 2, getHeight() / 2, 20, 20);
+		map = new Rectangle2D.Float(20f, 20f, 1040f, 680f);
 	}
 
 	public void paintComponent(Graphics g) {
@@ -44,13 +50,16 @@ public class GamePanel extends JPanel implements ActionListener {
 		g2.setColor(Color.BLUE);
 		g2.fill(Player2);
 		g2.setColor(Color.WHITE);
+		
 		g2.fill(Ball);
+		
 	}
 
 	private void drawMap(Graphics2D g2) {
+		
 		g2.setColor(Color.WHITE);
 		g2.setStroke(new BasicStroke(9, BasicStroke.CAP_BUTT,BasicStroke.JOIN_BEVEL, 0));
-		g2.draw((Shape) new Rectangle2D.Float(20f, 20f, 1040f, 680f));
+		g2.draw((Shape) map);
 		g2.setStroke(new BasicStroke(9, BasicStroke.CAP_BUTT,BasicStroke.JOIN_BEVEL, 0, new float[] { 9 }, 0));
 		g2.drawLine(1080 / 2, 20, 1080 / 2, 700);
 	}
@@ -63,11 +72,11 @@ public class GamePanel extends JPanel implements ActionListener {
 		Player2 = player2;
 	}
 
-	public void setBall(Ellipse2D ball) {
+	public void setBall(Rectangle2D ball) {
 		Ball = ball;
 	}
 
-	public Ellipse2D getBall() {
+	public Rectangle2D getBall() {
 		return Ball;
 	}
 
@@ -82,6 +91,41 @@ public class GamePanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		repaint();
+		if(isHeadingR)
+		{
+			if(Player2.intersects(Ball) ||!map.contains(Ball))
+			{
+				isHeadingR=false;
+				isHeadingU=!isHeadingU;
+			}
+			if(isHeadingU)
+			{
+				Ball.setRect(Ball.getX()+1, Ball.getY()+1,Ball.getWidth(), Ball.getHeight());
+			}
+			else
+			{
+				Ball.setRect(Ball.getX()+1, Ball.getY()-1,Ball.getWidth(), Ball.getHeight());
+			}
+			
+		}
+		else
+		{
+			if(Player1.intersects(Ball) || !map.contains(Ball))
+			{
+				isHeadingR=true;
+				isHeadingU=!isHeadingU;
+			}
+			
+			if(isHeadingU)
+			{
+				Ball.setRect(Ball.getX()-1, Ball.getY()+1,Ball.getWidth(), Ball.getHeight());
+			}
+			else
+			{
+				Ball.setRect(Ball.getX()-1, Ball.getY()-1,Ball.getWidth(), Ball.getHeight());
+			}
+		}
+		
 	}
 
 }
