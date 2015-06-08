@@ -27,13 +27,13 @@ public class NetworkDataManager implements Runnable {
 		this.isHost=isHost;
 		this.panel=panel;
 		try {
-			in= (DataInputStream) socket.getInputStream();
+			in= new DataInputStream(socket.getInputStream());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			out= (DataOutputStream) socket.getOutputStream();
+			out= new DataOutputStream(socket.getOutputStream());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -60,12 +60,15 @@ public class NetworkDataManager implements Runnable {
 			if(delta >= 1)
 			{
 				if(isHost)
+				{
 					try {
 						updateHost();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					panel.setPlayer1(new Rectangle2D.Double(30, panel.getPlayer1().getY()+1, 10, 50));
+				}
 				else
 				{
 					try {
