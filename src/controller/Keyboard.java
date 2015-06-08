@@ -14,10 +14,12 @@ public class Keyboard implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			controller.setMag(0.5f);
 			controller.Up();
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			controller.setMag(0.5f);
 			controller.Down();
 		}
 	}

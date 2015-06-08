@@ -2,5 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/mauro/Google Drive/Technische Informatica/Proftaken/Proftaak periode 4/Technologie/Martijn, Arjen/Simon/Wii/wiiusej.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

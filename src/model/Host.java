@@ -7,6 +7,8 @@ import java.net.Socket;
 import view.Frame;
 import view.GamePanel;
 import view.Menu;
+import wiiusej.WiiUseApiManager;
+import wiiusej.Wiimote;
 import controller.Controller;
 
 public class Host {
@@ -17,6 +19,7 @@ public class Host {
 	private NetworkDataManager dataManager;
 	private Controller controller;
 	private Frame frame;
+	private Wiimote wiimote;
 	
 	
 
@@ -26,10 +29,21 @@ public class Host {
 		controller= new Controller(gamePanel,true);
 		this.frame.remove(menu);
 		this.frame.setContentPane(gamePanel);
+		connectWiimote();
+		wiimote.addWiiMoteEventListeners(controller.getWiimote());
 		this.frame.addKeyListener(controller.getKeyboard());
 		this.frame.revalidate();
 		Init();
 		this.frame.requestFocus();
+	}
+	
+	private void connectWiimote() {
+		Wiimote[] wiimotes = WiiUseApiManager.getWiimotes(1, true);
+		if (wiimotes.length != 0) {
+			wiimote = wiimotes[0];
+			wiimote.setLeds(true, true, true, true);
+			wiimote.activateMotionSensing();
+		}
 	}
 	
 	public void Init()
