@@ -41,7 +41,7 @@ public class Host {
 			e.printStackTrace();
 		}
 		
-		dataManager = new NetworkDataManager(socket);
+		dataManager = new NetworkDataManager(socket,true,gamePanel);
 		dataManager.start();
 		
 	}

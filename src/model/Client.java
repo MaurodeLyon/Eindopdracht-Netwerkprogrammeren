@@ -29,7 +29,7 @@ public class Client {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		dataManager = new NetworkDataManager(socket);
+		dataManager = new NetworkDataManager(socket,false,clientPanel);
 		dataManager.start();
 	}
 }

@@ -27,8 +27,8 @@ public class GamePanel extends JPanel implements ActionListener{
 		setPreferredSize(new Dimension(1080, 720));
 		setBackground(Color.BLACK);
 		Player1 = new Rectangle2D.Double(30, getHeight() / 2, 10, 50);
-		Player2 = new Rectangle2D.Double(getWidth() - 30, getHeight() / 2, 10,50);
-		Ball = new Ellipse2D.Double(getWidth() / 2, getHeight() / 2, 10, 10);
+		Player2 = new Rectangle2D.Double(getWidth() - 40, getHeight() / 2, 10,50);
+		Ball = new Ellipse2D.Double(getWidth() / 2, getHeight() / 2, 20, 20);
 	}
 
 	public void paintComponent(Graphics g) {
@@ -43,7 +43,7 @@ public class GamePanel extends JPanel implements ActionListener{
 		g2.fill(Player1);
 		g2.setColor(Color.BLUE);
 		g2.fill(Player2);
-		g2.setColor(Color.ORANGE);
+		g2.setColor(Color.WHITE);
 		g2.fill(Ball);
 	}
 
@@ -68,6 +68,22 @@ public class GamePanel extends JPanel implements ActionListener{
 	public void setBall(Ellipse2D ball) {
 		Ball = ball;
 	}
+	
+	public Ellipse2D getBall()
+	{
+		return Ball;
+	}
+	
+	public Rectangle2D getPlayer1()
+	{
+		return Player1;
+	}
+	
+	public Rectangle2D getPlayer2()
+	{
+		return Player2;
+	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
