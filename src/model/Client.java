@@ -27,7 +27,7 @@ public class Client {
 
 	public void Init() {
 		try {
-			socket = new Socket("145.102.72.143", 8888);
+			socket = new Socket("localhost", 8888);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

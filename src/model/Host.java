@@ -26,7 +26,9 @@ public class Host {
 		frame.setContentPane(gamePanel);
 		frame.addKeyListener(controller.getKeyboard());
 		frame.revalidate();
+		
 		Init();
+		gamePanel.repaint();
 	}
 	
 	public void Init()

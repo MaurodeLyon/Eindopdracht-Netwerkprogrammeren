@@ -15,14 +15,14 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 @SuppressWarnings("serial")
-public class GamePanel extends JPanel implements ActionListener {
+public class GamePanel extends JPanel implements ActionListener{
 
 	private Rectangle2D Player1;
 	private Rectangle2D Player2;
 	private Ellipse2D Ball;
 
 	public GamePanel() {
-		new Timer(1000 / 60, this).start();
+		new Timer(1000/60, this).start();
 		setSize(new Dimension(1080, 720));
 		setPreferredSize(new Dimension(1080, 720));
 		setBackground(Color.BLACK);
@@ -49,9 +49,11 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	private void drawMap(Graphics2D g2) {
 		g2.setColor(Color.WHITE);
-		g2.setStroke(new BasicStroke(9, BasicStroke.CAP_BUTT,BasicStroke.JOIN_BEVEL, 0));
+		g2.setStroke(new BasicStroke(9, BasicStroke.CAP_BUTT,
+				BasicStroke.JOIN_BEVEL, 0));
 		g2.draw((Shape) new Rectangle2D.Float(20f, 20f, 1040f, 680f));
-		g2.setStroke(new BasicStroke(9, BasicStroke.CAP_BUTT,BasicStroke.JOIN_BEVEL, 0, new float[] { 9 }, 0));
+		g2.setStroke(new BasicStroke(9, BasicStroke.CAP_BUTT,
+				BasicStroke.JOIN_BEVEL, 0, new float[] { 9 }, 0));
 		g2.drawLine(1080 / 2, 20, 1080 / 2, 700);
 	}
 
@@ -66,22 +68,26 @@ public class GamePanel extends JPanel implements ActionListener {
 	public void setBall(Ellipse2D ball) {
 		Ball = ball;
 	}
-
-	public Ellipse2D getBall() {
+	
+	public Ellipse2D getBall()
+	{
 		return Ball;
 	}
-
-	public Rectangle2D getPlayer1() {
+	
+	public Rectangle2D getPlayer1()
+	{
 		return Player1;
 	}
-
-	public Rectangle2D getPlayer2() {
+	
+	public Rectangle2D getPlayer2()
+	{
 		return Player2;
 	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		repaint();
+		repaint();		
 	}
 
 }
