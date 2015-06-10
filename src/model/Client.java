@@ -18,16 +18,19 @@ public class Client {
 	private Controller controller;
 	private Frame frame;
 	private Wiimote wiimote;
+	
+	private Score score;
 
 	public Client(Frame frame, Menu menu) {
+		score = new Score();
 		this.frame = frame;
-		clientPanel = new GamePanel();
+		clientPanel = new GamePanel(score,false);
 		controller =new Controller(clientPanel,false); 
 		this.frame.remove(menu);
 		this.frame.setContentPane(clientPanel);
 		
-		connectWiimote();
-		wiimote.addWiiMoteEventListeners(controller.getWiimote());
+		//connectWiimote();
+		//wiimote.addWiiMoteEventListeners(controller.getWiimote());
 		this.frame.addKeyListener(controller.getKeyboard());
 
 		Init();

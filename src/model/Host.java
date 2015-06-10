@@ -20,17 +20,19 @@ public class Host {
 	private Controller controller;
 	private Frame frame;
 	private Wiimote wiimote;
+	private Score score;
 	
 	
 
 	public Host(Frame frame, Menu menu) {
 		this.frame = frame;
-		gamePanel = new GamePanel();
+		score = new Score();
+		gamePanel = new GamePanel(score,true);
 		controller= new Controller(gamePanel,true);
 		this.frame.remove(menu);
 		this.frame.setContentPane(gamePanel);
-		connectWiimote();
-		wiimote.addWiiMoteEventListeners(controller.getWiimote());
+		//connectWiimote();
+		//wiimote.addWiiMoteEventListeners(controller.getWiimote());
 		this.frame.addKeyListener(controller.getKeyboard());
 		this.frame.revalidate();
 		Init();

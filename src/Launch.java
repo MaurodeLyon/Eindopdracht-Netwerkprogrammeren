@@ -1,3 +1,4 @@
+import view.FontLoader;
 import view.Frame;
 
 public class Launch {

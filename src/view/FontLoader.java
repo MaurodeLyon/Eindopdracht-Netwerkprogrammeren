@@ -1,3 +1,4 @@
+package view;
 
 
 import java.awt.Font;
@@ -14,7 +15,7 @@ public class FontLoader {
 	public static void loadFont()
 	{
 		try {
-			customFont = Font.createFont(Font.TRUETYPE_FONT,FontLoader.class.getResourceAsStream("/PressStart2P.ttf")).deriveFont(20f); 
+			customFont = Font.createFont(Font.TRUETYPE_FONT,FontLoader.class.getResourceAsStream("/PressStart2P.ttf")).deriveFont(40f); 
 			
 			GraphicsEnvironment ge = 
 		         GraphicsEnvironment.getLocalGraphicsEnvironment();

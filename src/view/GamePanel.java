@@ -14,6 +14,10 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import model.Score;
+
+
+
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements ActionListener {
 
@@ -24,8 +28,14 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	private int speedX = 2;
 	private int speedY = 2;
+	
+	private boolean isHost;
+	
+	private Score score;
 
-	public GamePanel() {
+	public GamePanel(Score score, boolean b) {
+		isHost=b;
+		this.score=score;
 		new Timer(1000 / 60, this).start();
 		setSize(new Dimension(1080, 720));
 		setPreferredSize(new Dimension(1080, 720));
@@ -42,6 +52,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		Graphics2D g2 = (Graphics2D) g;
 		drawMap(g2);
 		drawEntities(g2);
+		drawScore(g2);
 	}
 
 	private void drawEntities(Graphics2D g2) {
@@ -62,6 +73,14 @@ public class GamePanel extends JPanel implements ActionListener {
 		g2.setStroke(new BasicStroke(9, BasicStroke.CAP_BUTT,
 				BasicStroke.JOIN_BEVEL, 0, new float[] { 9 }, 0));
 		g2.drawLine(1080 / 2, 20, 1080 / 2, 700);
+	}
+	
+	private void drawScore(Graphics2D g2)
+	{
+		g2.setColor(Color.WHITE);
+		g2.setFont(FontLoader.customFont.deriveFont(22f));
+		g2.drawString(String.valueOf(score.getScore("p1")), 540-80, 80);
+		g2.drawString(String.valueOf(score.getScore("p2")), 540+80, 80);
 	}
 
 	public void setPlayer1(Rectangle2D player1) {
@@ -97,12 +116,16 @@ public class GamePanel extends JPanel implements ActionListener {
 		if (ball.x < map.x) {
 			ball = new Ellipse2D.Double(getWidth() / 2, getHeight() / 2, 20, 20);
 			//point for player 2
+			if(isHost)
+				score.IncreaseScore("p2");
 		}
 
 		// checks if ball touches right border
 		if (ball.x + ball.width > map.x + map.width) {
 			ball = new Ellipse2D.Double(getWidth() / 2, getHeight() / 2, 20, 20);
 			//point for player 1
+			if(isHost)
+				score.IncreaseScore("p1");
 		}
 
 		// check if ball touches top border
@@ -133,6 +156,16 @@ public class GamePanel extends JPanel implements ActionListener {
 		}
 
 		repaint();
+	}
+	
+	public Score getScore()
+	{
+		return score;
+	}
+	
+	public void setScore(Score score)
+	{
+		this.score=score;
 	}
 
 }
