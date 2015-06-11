@@ -19,12 +19,13 @@ public class Client {
 	private Frame frame;
 	private Wiimote wiimote;
 	
-	private Score score;
+	private ScoreIndependent score1,score2;
 
 	public Client(Frame frame, Menu menu) {
-		score = new Score();
+		score1 = new ScoreIndependent();
+		score2= new ScoreIndependent();
 		this.frame = frame;
-		clientPanel = new GamePanel(score,false);
+		clientPanel = new GamePanel(score1,score2,false);
 		controller =new Controller(clientPanel,false); 
 		this.frame.remove(menu);
 		this.frame.setContentPane(clientPanel);

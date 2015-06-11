@@ -20,14 +20,16 @@ public class Host {
 	private Controller controller;
 	private Frame frame;
 	private Wiimote wiimote;
-	private Score score;
+	private ScoreIndependent score1,score2;
+	
 	
 	
 
 	public Host(Frame frame, Menu menu) {
 		this.frame = frame;
-		score = new Score();
-		gamePanel = new GamePanel(score,true);
+		score1 = new ScoreIndependent();
+		score2= new ScoreIndependent();
+		gamePanel = new GamePanel(score1,score2,true);
 		controller= new Controller(gamePanel,true);
 		this.frame.remove(menu);
 		this.frame.setContentPane(gamePanel);

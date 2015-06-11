@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import model.Score;
+import model.ScoreIndependent;
 
 
 
@@ -31,11 +32,14 @@ public class GamePanel extends JPanel implements ActionListener {
 	
 	private boolean isHost;
 	
-	private Score score;
+	private ScoreIndependent score1,score2;
+	private boolean player2Wins=false;
+	private boolean player1Wins=false;
 
-	public GamePanel(Score score, boolean b) {
+	public GamePanel(ScoreIndependent score1,ScoreIndependent score2, boolean b) {
 		isHost=b;
-		this.score=score;
+		this.score1=score1;
+		this.score2=score2;
 		new Timer(1000 / 60, this).start();
 		setSize(new Dimension(1080, 720));
 		setPreferredSize(new Dimension(1080, 720));
@@ -47,12 +51,23 @@ public class GamePanel extends JPanel implements ActionListener {
 		map = new Rectangle2D.Double(20f, 20f, 1040f, 680f);
 	}
 
+	
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		drawMap(g2);
 		drawEntities(g2);
 		drawScore(g2);
+		
+		if(player1Wins)
+		{
+			g2.drawString("P1 WON!", 100, 200);
+		}
+		if(player2Wins)
+		{
+			g2.drawString("P2 WON!", 1080-100,200);
+		}
 	}
 
 	private void drawEntities(Graphics2D g2) {
@@ -79,8 +94,8 @@ public class GamePanel extends JPanel implements ActionListener {
 	{
 		g2.setColor(Color.WHITE);
 		g2.setFont(FontLoader.customFont.deriveFont(22f));
-		g2.drawString(String.valueOf(score.getScore("p1")), 540-80, 80);
-		g2.drawString(String.valueOf(score.getScore("p2")), 540+80, 80);
+		g2.drawString(String.valueOf(score1.getScore()), 540-80, 80);
+		g2.drawString(String.valueOf(score2.getScore()), 540+80, 80);
 	}
 
 	public void setPlayer1(Rectangle2D player1) {
@@ -109,23 +124,25 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		ball.x += speedX;
-		ball.y += speedY;
+		if(isHost)
+		{
+			ball.x += speedX;
+			ball.y += speedY;
 
-		// checks if ball touches left border
-		if (ball.x < map.x) {
-			ball = new Ellipse2D.Double(getWidth() / 2, getHeight() / 2, 20, 20);
-			//point for player 2
-			if(isHost)
-				score.IncreaseScore("p2");
-		}
+			// checks if ball touches left border
+			if (ball.x < map.x) {
+				ball = new Ellipse2D.Double(getWidth() / 2, getHeight() / 2, 20, 20);
+				//point for player 2
+				if(isHost)
+					score2.IncreaseScore();
+			}	
 
-		// checks if ball touches right border
-		if (ball.x + ball.width > map.x + map.width) {
-			ball = new Ellipse2D.Double(getWidth() / 2, getHeight() / 2, 20, 20);
-			//point for player 1
-			if(isHost)
-				score.IncreaseScore("p1");
+			// checks if ball touches right border
+			if (ball.x + ball.width > map.x + map.width) {
+				ball = new Ellipse2D.Double(getWidth() / 2, getHeight() / 2, 20, 20);
+				//point for player 1
+				if(isHost)
+					score1.IncreaseScore();
 		}
 
 		// check if ball touches top border
@@ -154,18 +171,43 @@ public class GamePanel extends JPanel implements ActionListener {
 			speedX = -speedX;
 			//speedY = -5 + (int) (Math.random() * 10);
 		}
+		}
+		
+		if(score1.getScore() >5 || score2.getScore() >=5)
+		{
+			switch(score1.compareTo(score2))
+			{
+			case -1:
+				player2Wins=true;
+				break;
+			case 1:
+				player1Wins=true;
+				break;
+		
+			}
+		}
 
 		repaint();
+		
+		
 	}
 	
-	public Score getScore()
+	public ScoreIndependent getScore1()
 	{
-		return score;
+		return score1;
+	}
+	public ScoreIndependent getScore2()
+	{
+		return score2;
 	}
 	
-	public void setScore(Score score)
+	public void setScore1(ScoreIndependent score)
 	{
-		this.score=score;
+		this.score1=score;
+	}
+	public void setScore2(ScoreIndependent score)
+	{
+		this.score2=score;
 	}
 
 }

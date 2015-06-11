@@ -2,7 +2,7 @@ package model;
 
 import java.io.Serializable;
 
-public class Score implements Serializable{
+public class Score implements Serializable, Comparable<Integer>{
 	
 	/**
 	 * 
@@ -43,6 +43,12 @@ public class Score implements Serializable{
 		}
 		
 		return player2;
+	}
+
+	@Override
+	public int compareTo(Integer o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

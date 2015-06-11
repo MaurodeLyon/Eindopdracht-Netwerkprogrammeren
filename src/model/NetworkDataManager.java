@@ -43,19 +43,19 @@ public class NetworkDataManager implements Runnable {
 		
 		
 		
-		try {
-			ObjOut = new ObjectOutputStream(socket.getOutputStream());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
-			ObjIn = new ObjectInputStream(socket.getInputStream());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			ObjOut = new ObjectOutputStream(socket.getOutputStream());
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		try {
+//			ObjIn = new ObjectInputStream(socket.getInputStream());
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	@Override
@@ -113,15 +113,16 @@ public class NetworkDataManager implements Runnable {
 			double player1y = in.readDouble();
 			panel.setPlayer1(new Rectangle2D.Double(30, player1y, 10, 50));
 			
-			try {
-				panel.setScore((Score)ObjIn.readObject());
-			} catch (ClassNotFoundException e ) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println(panel.getScore().getScore("p1") + ", " + panel.getScore().getScore("p2"));
-			
-			
+//			try {
+//				panel.setScore((Score)ObjIn.readObject());
+//			} catch (ClassNotFoundException e ) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			//System.out.println(ObjIn.available());
+//			System.out.println(panel.getScore().getScore("p1") + ", " + panel.getScore().getScore("p2"));
+//			
+//			
 			
 		}
 
@@ -135,7 +136,7 @@ public class NetworkDataManager implements Runnable {
 		out.writeDouble(panel.getPlayer1().getY());
 		
 		//Send Score
-		ObjOut.writeObject(panel.getScore());
+		//ObjOut.writeObject(panel.getScore());
 		// receive position player2
 		if (in.available() > 0) {
 			double player2y = in.readDouble();
