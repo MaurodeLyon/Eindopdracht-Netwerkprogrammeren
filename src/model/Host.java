@@ -27,8 +27,8 @@ public class Host {
 
 	public Host(Frame frame, Menu menu) {
 		this.frame = frame;
-		score1 = new ScoreIndependent();
-		score2= new ScoreIndependent();
+		score1 = new ScoreIndependent(0);
+		score2= new ScoreIndependent(0);
 		gamePanel = new GamePanel(score1,score2,true);
 		controller= new Controller(gamePanel,true);
 		this.frame.remove(menu);

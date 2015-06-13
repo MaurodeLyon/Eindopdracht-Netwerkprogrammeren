@@ -22,8 +22,8 @@ public class Client {
 	private ScoreIndependent score1,score2;
 
 	public Client(Frame frame, Menu menu) {
-		score1 = new ScoreIndependent();
-		score2= new ScoreIndependent();
+		score1 = new ScoreIndependent(0);
+		score2= new ScoreIndependent(0);
 		this.frame = frame;
 		clientPanel = new GamePanel(score1,score2,false);
 		controller =new Controller(clientPanel,false); 

@@ -10,7 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -35,6 +38,8 @@ public class GamePanel extends JPanel implements ActionListener {
 	private ScoreIndependent score1,score2;
 	private boolean player2Wins=false;
 	private boolean player1Wins=false;
+	
+	private BufferedImage winScreen;
 
 	public GamePanel(ScoreIndependent score1,ScoreIndependent score2, boolean b) {
 		isHost=b;
@@ -49,6 +54,14 @@ public class GamePanel extends JPanel implements ActionListener {
 				50);
 		ball = new Ellipse2D.Double(getWidth() / 2, getHeight() / 2, 20, 20);
 		map = new Rectangle2D.Double(20f, 20f, 1040f, 680f);
+		
+		
+		try {
+			winScreen = ImageIO.read(this.getClass().getResource("/waitingScreen3.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	
@@ -60,13 +73,17 @@ public class GamePanel extends JPanel implements ActionListener {
 		drawEntities(g2);
 		drawScore(g2);
 		
+		g2.setFont(FontLoader.customFont.deriveFont(72f));
 		if(player1Wins)
 		{
-			g2.drawString("P1 WON!", 100, 200);
+			g2.setColor(Color.BLACK);
+			g2.drawImage(winScreen, 0,0,1080,720,null);
+			g2.drawString("P1 WON!", (1080/2) - (g2.getFontMetrics().stringWidth("P1 WON!")/2),(720/2) - g2.getFontMetrics().getHeight()/2);
 		}
 		if(player2Wins)
 		{
-			g2.drawString("P2 WON!", 1080-100,200);
+			g2.drawImage(winScreen, 0,0,1080,720,null);
+			g2.drawString("P2 WON!", (1080/2) - (g2.getFontMetrics().stringWidth("P2 WON!")/2),(720/2) - g2.getFontMetrics().getHeight()/2);
 		}
 	}
 
@@ -173,7 +190,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		}
 		}
 		
-		if(score1.getScore() >5 || score2.getScore() >=5)
+		if(score1.getScore() ==5 || score2.getScore() ==5)
 		{
 			switch(score1.compareTo(score2))
 			{

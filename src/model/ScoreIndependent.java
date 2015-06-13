@@ -4,9 +4,9 @@ public class ScoreIndependent implements Comparable<ScoreIndependent> {
 	
 	private int score;
 	
-	public ScoreIndependent()
+	public ScoreIndependent(int score)
 	{
-		score=0;
+		this.score=score;
 	}
 	
 	public void resetScores()

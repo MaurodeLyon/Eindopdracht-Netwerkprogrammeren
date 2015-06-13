@@ -113,6 +113,9 @@ public class NetworkDataManager implements Runnable {
 			double player1y = in.readDouble();
 			panel.setPlayer1(new Rectangle2D.Double(30, player1y, 10, 50));
 			
+			panel.setScore1(new ScoreIndependent((int)in.readDouble()));
+			panel.setScore2(new ScoreIndependent((int)in.readDouble()));
+			
 //			try {
 //				panel.setScore((Score)ObjIn.readObject());
 //			} catch (ClassNotFoundException e ) {
@@ -137,6 +140,8 @@ public class NetworkDataManager implements Runnable {
 		
 		//Send Score
 		//ObjOut.writeObject(panel.getScore());
+		out.writeDouble(panel.getScore1().getScore());
+		out.writeDouble(panel.getScore2().getScore());
 		// receive position player2
 		if (in.available() > 0) {
 			double player2y = in.readDouble();
