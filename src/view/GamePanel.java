@@ -133,7 +133,7 @@ public class GamePanel extends JPanel implements ActionListener {
 			if (ball.x < map.x) {
 				ball = new Ellipse2D.Double(getWidth() / 2, getHeight() / 2, 20, 20);
 				//point for player 2
-				if(isHost)
+				//if(isHost)
 					score2.IncreaseScore();
 			}	
 
@@ -141,7 +141,7 @@ public class GamePanel extends JPanel implements ActionListener {
 			if (ball.x + ball.width > map.x + map.width) {
 				ball = new Ellipse2D.Double(getWidth() / 2, getHeight() / 2, 20, 20);
 				//point for player 1
-				if(isHost)
+				//if(isHost)
 					score1.IncreaseScore();
 		}
 
