@@ -33,7 +33,7 @@ public class Host {
 		controller= new Controller(gamePanel,true);
 		this.frame.remove(menu);
 		this.frame.setContentPane(gamePanel);
-		//connectWiimote();
+		connectWiimote();
 		//wiimote.addWiiMoteEventListeners(controller.getWiimote());
 		this.frame.addKeyListener(controller.getKeyboard());
 		this.frame.revalidate();

@@ -30,7 +30,7 @@ public class Client {
 		this.frame.remove(menu);
 		this.frame.setContentPane(clientPanel);
 		
-		//connectWiimote();
+		connectWiimote();
 		//wiimote.addWiiMoteEventListeners(controller.getWiimote());
 		this.frame.addKeyListener(controller.getKeyboard());
 
