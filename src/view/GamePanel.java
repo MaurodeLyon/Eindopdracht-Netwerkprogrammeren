@@ -82,6 +82,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		}
 		if(player2Wins)
 		{
+			g2.setColor(Color.BLACK);
 			g2.drawImage(winScreen, 0,0,1080,720,null);
 			g2.drawString("P2 WON!", (1080/2) - (g2.getFontMetrics().stringWidth("P2 WON!")/2),(720/2) - g2.getFontMetrics().getHeight()/2);
 		}
@@ -203,7 +204,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		
 			}
 		}
-
+		//System.out.println(player2Wins + ", " + player1Wins);
 		repaint();
 		
 		
