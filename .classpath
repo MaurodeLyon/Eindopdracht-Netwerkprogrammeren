@@ -4,8 +4,8 @@
 	<classpathentry kind="src" path="recursion"/>
 	<classpathentry kind="src" path="generics"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Mauro/Documents/GitHub/Eindopdracht-Netwerkprogrammeren/wiiusej 0.12b/wiiusej.jar"/>
 	<classpathentry kind="lib" path="font"/>
 	<classpathentry kind="lib" path="recources"/>
+	<classpathentry kind="lib" path="wiiusej 0.12b/wiiusej.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
